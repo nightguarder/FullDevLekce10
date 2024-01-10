@@ -9,15 +9,9 @@ import { PostschemaValidate } from "../api/postSchema";
 //Controller + Router
 export class CRUDController {
   private postServices: CRUDService;
-  private collection: any;
 
   constructor(postServices: CRUDService) {
     this.postServices = postServices;
-  }
-
-  // Method to set the MongoDB collection
-  setCollection(collection: any) {
-    this.collection = collection;
   }
 
   //*CREATE*

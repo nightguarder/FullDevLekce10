@@ -1,7 +1,7 @@
 @url = http://localhost:3000
 @deletepost = 
 @changepost = 
-@singlepost = 
+@singlepost = 659ee26d0b9e9ccfbf37c1c6
 @date = "{{$datetime iso8601}}"
 ### 
 //Return All blog posts

@@ -3,14 +3,9 @@ import express from "express";
 import { CRUDController } from "../controller/CRUDController";
 
 //Pro pouziti vytvor instanci v main.ts..
-export default function createRouter(
-  controller: CRUDController,
-  collection: any
-) {
+export default function createRouter(controller: CRUDController) {
   const router = express.Router();
-  //Use collection defined in main.ts
 
-  controller.setCollection(collection);
   //add new post
   router.post("/", controller.addpost);
 

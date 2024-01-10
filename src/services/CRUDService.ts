@@ -1,10 +1,16 @@
-import { Post } from "../api/postSchema";
-//Module for handling all CRUD operations
+//Mongo Module for handling all CRUD operations
+import { ObjectId } from "mongodb";
+
 export class CRUDService {
+  private collection: any;
+
+  constructor(collection: any) {
+    this.collection = collection;
+  }
   //*CREATE*
   async createPost(data: any) {
     try {
-      const newPost = await Post.create(data);
+      const newPost = await this.collection.insertOne(data);
       return console.log("New Post Created!", newPost);
     } catch (error) {
       console.error(error);
@@ -13,7 +19,7 @@ export class CRUDService {
   //*READ*
   async getAllPost() {
     try {
-      const posts = await Post.find({});
+      const posts = await this.collection.find({}).toArray();
       return console.log("Found all posts:", posts);
     } catch (error) {
       console.error(error);
@@ -23,7 +29,7 @@ export class CRUDService {
   //Find the Post Using _ObjectId
   async getPost(id: string) {
     try {
-      const post = await Post.findById({ _id: id });
+      const post = await this.collection.findOne({ _id: new ObjectId(id) });
       if (!post) {
         return console.log("Post not found!", post);
       }
@@ -37,10 +43,14 @@ export class CRUDService {
     try {
       //Use id of object in db
       //new:true updated document is returned after the update
-      const editedPost = await Post.findByIdAndUpdate({ _id: id }, data, {
-        new: true,
-      });
-      if (!editedPost) {
+      const editedPost = await this.collection.findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: data },
+        {
+          returnOriginal: false,
+        }
+      );
+      if (!editedPost.value) {
         return console.log("Cannot edit post");
       }
       console.log("Updated Post:", editedPost);
@@ -52,8 +62,10 @@ export class CRUDService {
   //*DELETE*
   async deletePost(id: string) {
     try {
-      const deletePost = await Post.findByIdAndDelete({ id });
-      if (!deletePost) {
+      const deletePost = await this.collection.findOneAndDelete({
+        _id: new ObjectId(id),
+      });
+      if (!deletePost.value) {
         return console.log("Post not found!");
       }
     } catch (error) {

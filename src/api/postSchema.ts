@@ -52,4 +52,4 @@ const postSchema = new Schema<IPosts>({
   //Add more...
 });
 
-export const Post = model<IPosts>("Posts", postSchema);
+export const Post = model<IPosts>("posts", postSchema);

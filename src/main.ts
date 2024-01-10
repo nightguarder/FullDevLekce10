@@ -1,11 +1,13 @@
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
-import MongoConn from "./services/MongoConnect";
+import { MongoConn } from "./services/MongoConnect";
 import errorHandler from "./middleware/exceptions";
 import { CRUDService } from "./services/CRUDService";
 import { CRUDController } from "./controller/CRUDController";
 import createRouter from "./routes/routes";
+import { Post } from "./api/postSchema";
+import { Collection } from "mongoose";
 
 //Dotenv
 require("dotenv").config();
@@ -30,29 +32,21 @@ async function run() {
     process.exit(1); //Exiting now
   }
 
-  //Else
-  // Start the express app
-  app.listen(PORT, () => {
-    // Log a message when the server is running
-    console.log(`Server is running on port http://${HOST}:${PORT}.`);
-  });
-
-  //Default endpoint
-  app.get("/", (req, res) => {
-    res.json({ message: "Default '/' ExpressJS endpoint" });
-  });
-
-  //App Instances
+  // Get the 'blog' collection
   const db = mongo.db("blog");
   const collection = db.collection("posts");
-
+  //Else
   //Services & Controllers instance
-  const postServices = new CRUDService();
-  const postController = new CRUDController(postServices);
+  const PostServices = new CRUDService(collection);
+  const postController = new CRUDController(PostServices);
 
   //Routing
-  const postRouter = createRouter(postController, collection);
+  const postRouter = await createRouter(postController);
   app.use("/api/v1/posts", postRouter);
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on port http://${HOST}:${PORT}.`);
+  });
 
   //Middleware
   app.use(errorHandler);

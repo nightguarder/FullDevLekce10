@@ -6,11 +6,10 @@ dotenv.config();
 const MONGO_URI = process.env.MONGO_URI || "mongodb://";
 
 //Local DB connection instance
-export default class MongoConn {
+export class MongoConn {
   static async connectDB() {
     const client = new MongoClient(MONGO_URI);
     await client.connect();
-    console.log("Successfully connected to MongoDB!");
     return client;
   }
 }
