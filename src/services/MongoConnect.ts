@@ -3,11 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const mongo_link = process.env.MONGO_URL || "mongodb://";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://";
 
 //Local DB connection instance
 export default class MongoConn {
-  static connectDB() {
-    return new MongoClient(mongo_link);
+  static async connectDB() {
+    const client = new MongoClient(MONGO_URI);
+    await client.connect();
+    console.log("Successfully connected to MongoDB!");
+    return client;
   }
 }

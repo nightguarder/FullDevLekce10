@@ -1,6 +1,30 @@
 import express from "express";
 
-//Initiating the router
-export const Router = express.Router();
+import { CRUDController } from "../controller/CRUDController";
 
-export default Router;
+//Pro pouziti vytvor instanci v main.ts..
+export default function createRouter(
+  controller: CRUDController,
+  collection: any
+) {
+  const router = express.Router();
+  //Use collection defined in main.ts
+
+  controller.setCollection(collection);
+  //add new post
+  router.post("/", controller.addpost);
+
+  //get All posts
+  router.get("/", controller.getAllPost);
+
+  //get single post
+  router.get("/:id", controller.getPost);
+
+  //update
+  router.put("/:id", controller.updatePost);
+
+  //delete
+  router.delete("/:id", controller.deletePost);
+
+  return router;
+}
