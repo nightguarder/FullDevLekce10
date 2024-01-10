@@ -23,9 +23,9 @@ Dockerize my blog post app
 
 - [x] Dockerize app
 - [x] Load sample dataset from [MongoDB JSON Data](https://github.com/ozlerhakan/mongodb-json-files.git)
-- [ ] Create multiple endpoints with CRUD
+- [x] Create multiple endpoints with CRUD
 - [ ] Advanced operations with data
-
+- [ ] Add Users to the blog database
 ## Setup
 
 1. Run local Docker instance

@@ -1,4 +1,4 @@
-import { CRUDService } from "../services/CRUDService";
+import { PostService } from "../services/PostService";
 import { Request, Response } from "express";
 import { PostschemaValidate } from "../api/postSchema";
 
@@ -7,10 +7,10 @@ import { PostschemaValidate } from "../api/postSchema";
 //const postController = new CRUDController(postServices);
 
 //Controller + Router
-export class CRUDController {
-  private postServices: CRUDService;
+export class PostController {
+  private postServices: PostService;
 
-  constructor(postServices: CRUDService) {
+  constructor(postServices: PostService) {
     this.postServices = postServices;
   }
 

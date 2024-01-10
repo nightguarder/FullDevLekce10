@@ -1,7 +1,7 @@
 //Mongo Module for handling all CRUD operations
 import { ObjectId } from "mongodb";
 
-export class CRUDService {
+export class PostService {
   private collection: any;
 
   constructor(collection: any) {
@@ -73,4 +73,4 @@ export class CRUDService {
     }
   }
 }
-//Moved to main.tsexport const PostServices = new CRUDService()
+////Moved to main.ts export const PostServices = new CRUDService()

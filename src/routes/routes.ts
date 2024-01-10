@@ -1,9 +1,9 @@
 import express from "express";
 
-import { CRUDController } from "../controller/CRUDController";
+import { PostController } from "../controller/PostController";
 
 //Pro pouziti vytvor instanci v main.ts..
-export default function createRouter(controller: CRUDController) {
+export default function createRouter(controller: PostController) {
   const router = express.Router();
 
   //add new post

@@ -3,8 +3,8 @@ import helmet from "helmet";
 import cors from "cors";
 import { MongoConn } from "./services/MongoConnect";
 import errorHandler from "./middleware/exceptions";
-import { CRUDService } from "./services/CRUDService";
-import { CRUDController } from "./controller/CRUDController";
+import { PostService } from "./services/PostService";
+import { PostController } from "./controller/PostController";
 import createRouter from "./routes/routes";
 import { Post } from "./api/postSchema";
 import { Collection } from "mongoose";
@@ -37,8 +37,8 @@ async function run() {
   const collection = db.collection("posts");
   //Else
   //Services & Controllers instance
-  const PostServices = new CRUDService(collection);
-  const postController = new CRUDController(PostServices);
+  const PostServices = new PostService(collection);
+  const postController = new PostController(PostServices);
 
   //Routing
   const postRouter = await createRouter(postController);
