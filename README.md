@@ -2,6 +2,8 @@
 
 Dockerize my blog post app
 
+**Project was migrated to:[new repo](https://github.com/nightguarder/DreamBlogger.git)**
+
 # Domácí úkol 10
 
 - Deadline: 9.1.2024 23:59
@@ -26,6 +28,7 @@ Dockerize my blog post app
 - [x] Create multiple endpoints with CRUD
 - [ ] Advanced operations with data
 - [ ] Add Users to the blog database
+
 ## Setup
 
 1. Run local Docker instance
@@ -37,8 +40,8 @@ Dockerize my blog post app
 2. Load Tweets dataset
    Data can be restored with:
    `shell
-    mongorestore -u admin  -p mongopwd --authenticationDatabase admin sample/dump/
-    `
+mongorestore -u admin  -p mongopwd --authenticationDatabase admin sample/dump/
+`
 
 - _Note_ You have to have [MongoDB Database Tools](https://www.mongodb.com/docs/database-tools/installation/installation/) installed to run this command.
 
